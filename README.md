@@ -71,4 +71,4 @@ Consistend Response with proper data formatting, validation and error handling.
 ![get todo picture](docs/Endpoint_3_Status_Change.png "Get TODO")
 ![get todo picture](docs/Endpoint_4_Delete_Todo.png "Get TODO")
 
-All of these implementations are done at my best ability of understanding how a project should structure, how we should use certain patterns and so on. Patterns like rate limiters or retry or circuitbreakers are not utilized because its just a todo app.
+All of these implementations are done at my best ability of understanding how a project should structure, how we should use certain patterns and so on. Patterns like rate limiters or retry or circuitbreakers are not utilized because its just a todo app. Hope you like it. 😊
