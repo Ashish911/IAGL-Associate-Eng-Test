@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Todo from "./Todo";
-import { fetchTodos } from "../actions";
+import { toggleTodo, deleteTodo } from "../actions";
 import { connect } from "react-redux";
 
 class TodoList extends Component {
@@ -19,6 +19,22 @@ class TodoList extends Component {
     }
   };
 
+  handleComplete = async (id) => {
+    try {
+      await this.props.toggleTodo(id);
+    } catch (error) {
+      console.error("Error completing todo:", error);
+    }
+  };
+
+  handleDelete = async (id) => {
+    try {
+      await this.props.deleteTodo(id);
+    } catch (error) {
+      console.error("Error deleting todo:", error);
+    }
+  };
+
   render() {
     const { error } = this.props;
     const filteredTodos = this.getFilteredTodos();
@@ -28,7 +44,11 @@ class TodoList extends Component {
         {filteredTodos && filteredTodos.length ? (
           filteredTodos.map((todo) => (
             <li key={`todo-${todo.id}`}>
-              <Todo todo={todo} />
+              <Todo
+                todo={todo}
+                onComplete={() => this.handleComplete(todo.id || index)}
+                onDelete={() => this.handleDelete(todo.id || index)}
+              />
             </li>
           ))
         ) : (
@@ -47,4 +67,7 @@ const mapStateToProps = (state) => ({
   error: state.error,
 });
 
-export default connect(mapStateToProps, {})(TodoList);
+export default connect(mapStateToProps, {
+  toggleTodo,
+  deleteTodo,
+})(TodoList);

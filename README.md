@@ -60,7 +60,7 @@ You can assume the backend is running under `http://localhost:9091/api/todo`
 
 ## Frontend
 
-The design was taken from a simple todo app that i build almost 5 yrs ago in vanilla js with local storage.
+The design was taken from a simple todo app that i build almost 5 yrs ago in vanilla js with local storage. There is still some flaws in the design but the implementation is the main part so.... yeah hope you like it.
 ![get todo picture](docs/Frontend.png "Get TODO")
 
 ## Backend
@@ -70,3 +70,5 @@ Consistend Response with proper data formatting, validation and error handling.
 ![get todo picture](docs/Endpoint_2_Add_Todo.png "Get TODO")
 ![get todo picture](docs/Endpoint_3_Status_Change.png "Get TODO")
 ![get todo picture](docs/Endpoint_4_Delete_Todo.png "Get TODO")
+
+All of these implementations are done at my best ability of understanding how a project should structure, how we should use certain patterns and so on. Patterns like rate limiters or retry or circuitbreakers are not utilized because its just a todo app.
