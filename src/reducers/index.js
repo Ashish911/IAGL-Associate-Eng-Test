@@ -1,9 +1,32 @@
-import { FETCH_TODOS } from "../actions/types";
+import {
+  FETCH_TODOS,
+  ADD_TODO,
+  UPDATE_TODO,
+  DELETE_TODO,
+  TODO_ERROR,
+  SET_FILTER,
+} from "../actions/types";
 
-export default function(state = {}, action) {
+const initialState = {
+  todos: [],
+  error: null,
+};
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_TODOS:
-      return { data: action.payload };
+      return {
+        ...state,
+        todos: action.payload,
+        error: null,
+      };
+
+    case SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload,
+      };
+
     default:
       return state;
   }

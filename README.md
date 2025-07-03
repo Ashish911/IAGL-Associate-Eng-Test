@@ -60,10 +60,12 @@ You can assume the backend is running under `http://localhost:9091/api/todo`
 
 ## Frontend
 
+The design was taken from a simple todo app that i build almost 5 yrs ago in vanilla js with local storage.
 ![get todo picture](docs/Frontend.png "Get TODO")
 
 ## Backend
 
+Consistend Response with proper data formatting, validation and error handling.
 ![get todo picture](docs/Endpoint_1_Get_Todo.png "Get TODO")
 ![get todo picture](docs/Endpoint_2_Add_Todo.png "Get TODO")
 ![get todo picture](docs/Endpoint_3_Status_Change.png "Get TODO")
