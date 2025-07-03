@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchTodos, setFilter } from "../actions/index";
+import { fetchTodos, setFilter, addTodo } from "../actions/index";
 
 class AddTodo extends Component {
   state = {
@@ -16,12 +16,40 @@ class AddTodo extends Component {
     this.props.setFilter(e.target.value);
   };
 
+  handleChange = (e) => {
+    this.setState({
+      task: e.target.value,
+      error: "",
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { task } = this.state;
+    const { addTodo } = this.props;
+
+    if (!task.trim()) {
+      this.setState({ error: "Please enter a task" });
+      return;
+    }
+
+    addTodo(task)
+      .then(() => {
+        this.setState({ task: "" });
+      })
+      .catch((err) => {
+        this.setState({
+          error: err.message || "Failed to add todo",
+        });
+      });
+  };
+
   render() {
     const { task, error } = this.state;
 
     return (
       <div className="container">
-        <form className="todo-form">
+        <form onSubmit={this.handleSubmit} className="todo-form">
           <input
             type="text"
             className={`todo-input ${error ? "error" : ""}`}
@@ -56,4 +84,6 @@ const mapStateToProps = (state) => ({
   currentFilter: state.filter,
 });
 
-export default connect(mapStateToProps, { fetchTodos, setFilter })(AddTodo);
+export default connect(mapStateToProps, { fetchTodos, setFilter, addTodo })(
+  AddTodo
+);

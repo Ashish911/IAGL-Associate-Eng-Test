@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_TODOS, TODO_ERROR, SET_FILTER } from "./types";
+import { FETCH_TODOS, TODO_ERROR, SET_FILTER, ADD_TODO } from "./types";
 
 const API_URL = "http://localhost:9091/api/todo";
 
@@ -10,6 +10,23 @@ function fetchTodos() {
       .then((response) => {
         const data = handleResponse(response);
         dispatch(setTodos(data || []));
+      })
+      .catch((error) => {
+        const errorMessage = error.response?.data?.message || error.message;
+        dispatch(todoError({ message: errorMessage }));
+        throw new Error(errorMessage);
+      });
+  };
+}
+
+function addTodo(task) {
+  return function (dispatch) {
+    return axios
+      .post(API_URL, { task })
+      .then((response) => {
+        const data = handleResponse(response);
+        dispatch(addTodoSuccess(data));
+        return data;
       })
       .catch((error) => {
         const errorMessage = error.response?.data?.message || error.message;
@@ -40,6 +57,13 @@ function setFilter(filter) {
   };
 }
 
+function addTodoSuccess(todo) {
+  return {
+    type: ADD_TODO,
+    payload: todo,
+  };
+}
+
 // Extract response data and handle success/error
 const handleResponse = (response) => {
   if (!response.data.success) {
@@ -48,4 +72,4 @@ const handleResponse = (response) => {
   return response.data.data;
 };
 
-export { fetchTodos, setFilter };
+export { fetchTodos, setFilter, addTodo };

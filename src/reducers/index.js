@@ -27,6 +27,13 @@ export default function (state = initialState, action) {
         filter: action.payload,
       };
 
+    case ADD_TODO:
+      return {
+        ...state,
+        todos: [...state.todos, action.payload],
+        error: null,
+      };
+
     default:
       return state;
   }
